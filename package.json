@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build-css": "node-sass scss/main.scss --output public/css main.css”
+    "build-css": "node-sass scss/main.scss --output public/css main.css"
   },
   "repository": {
     "type": "git",
@@ -19,5 +19,8 @@
   "homepage": "https://github.com/dthai92/connect-5-react#readme",
   "devDependencies": {
     "node-sass": "^3.8.0"
+  },
+  "dependencies": {
+    "socket.io": "^1.4.8"
   }
 }
