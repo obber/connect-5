@@ -1,0 +1,23 @@
+{
+  "name": "connect-5-react",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-css": "node-sass scss/main.scss --output public/css main.css”
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dthai92/connect-5-react.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dthai92/connect-5-react/issues"
+  },
+  "homepage": "https://github.com/dthai92/connect-5-react#readme",
+  "devDependencies": {
+    "node-sass": "^3.8.0"
+  }
+}
