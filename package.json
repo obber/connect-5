@@ -2,9 +2,9 @@
   "name": "connect-5-react",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "./node_modules/jasmine-node/bin/jasmine-node ./spec",
     "build-css": "node-sass scss/main.scss --output public/css main.css"
   },
   "repository": {
@@ -18,9 +18,12 @@
   },
   "homepage": "https://github.com/dthai92/connect-5-react#readme",
   "devDependencies": {
+    "jasmine-node": "^1.14.5",
     "node-sass": "^3.8.0"
   },
   "dependencies": {
-    "socket.io": "^1.4.8"
+    "request": "^2.72.0",
+    "socket.io": "^1.4.8",
+    "socket.io-client": "^1.4.8"
   }
 }
