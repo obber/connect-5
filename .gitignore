@@ -36,5 +36,9 @@ jspm_packages
 # Optional REPL history
 .node_repl_history
 
-# Compiled css
+# Compiled files
 main.css
+dist
+
+# API Keys & Config Settings
+server/auth/config.js
