@@ -1,13 +1,19 @@
-const bodyParser = require('body-parser')
+import bodyParser from "body-parser";
+import express from "express";
+import http from "http";
+import socketIo from "socket.io";
 
-const app = require('express')();
-const server = require('http').Server(app);
-const io = require('socket.io')(server);
+const app = express();
+const server = http.Server(app);
+const io = socketIo(server);
 
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // parse application/json
-app.use(bodyParser.json())
+app.use(bodyParser.json());
+
+// public directory
+app.use(express.static('./public'));
 
 export { app, server, io };

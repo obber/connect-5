@@ -1,5 +1,7 @@
-import { server, app, io } from "common";
-import Game from "game/game";
+import { server, app, io } from "./common";
+import Game from "./game/game";
+
+import "./auth/auth";
 
 const port = process.env.PORT || 3456;
 
