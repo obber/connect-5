@@ -1,13 +1,13 @@
 import { facebook } from "./config";
 import passport from "passport";
 import { Strategy } from "passport-facebook";
-import app from "../common";
+import { app } from "../common";
 
 passport.use(new Strategy({
   clientID: facebook.appID,
   clientSecret: facebook.appSecret,
   callbackURL: "http://localhost:3456/login/facebook/return"
-}), function(accessToken, refreshToken, profile, cb) {
+}, function(accessToken, refreshToken, profile, cb) {
     // In this example, the user's Facebook profile is supplied as the user
     // record.  In a production-quality application, the Facebook profile should
     // be associated with a user record in the application's database, which
@@ -15,9 +15,9 @@ passport.use(new Strategy({
     // providers.
     console.log('user authenticated!');
     return cb(null, profile);
-  });
+  }
+));
 
-//
 // In order to restore authentication state across HTTP requests, Passport needs
 // to serialize users into and deserialize users out of the session.  In a
 // production-quality application, this would typically be as simple as
@@ -44,5 +44,5 @@ app.get('/login/facebook',
 app.get('/login/facebook/return', 
   passport.authenticate('facebook', { failureRedirect: '/login' }),
   function(req, res) {
-    res.redirect('/');
+    res.redirect('/home.html');
   });
