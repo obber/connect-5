@@ -6,19 +6,16 @@ module.exports = function(grunt) {
       options: {
         globals: {
           jQuery: true
-        }
+        },
+        esversion: 6
       }
     },
     watch: {
       styles: {
         files: ['scss/**/*.scss'],
         tasks: ['sass']
-      },
-      frontend: {
-        files: ['public/app/**/*.js'],
-        tasks: ['jshint', 'concat']
       }
-    }
+    },
     concat: {
       dist: {
         src: [
@@ -33,7 +30,7 @@ module.exports = function(grunt) {
       },
       dist: {
         files: {
-          'public/css/main.css': 'scss/main.scss'
+          'public/dist/main.css': 'scss/main.scss'
         }
       }
     }

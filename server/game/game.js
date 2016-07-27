@@ -6,5 +6,5 @@ const newGame = (socket1, socket2) => Object.assign({
 }, gameMethods);
 
 const gameMethods = {
-
+  
 }
