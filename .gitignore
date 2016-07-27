@@ -39,6 +39,7 @@ jspm_packages
 # Compiled files
 main.css
 dist
+public/dist/
 
 # API Keys & Config Settings
 server/auth/config.js
