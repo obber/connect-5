@@ -6,6 +6,7 @@
   "scripts": {
     "test": "jasmine-node ./spec --forceexit",
     "wp": "webpack --presets es2015,react --watch",
+    "build": "npm run build-css && npm run build-server",
     "build-css": "node-sass scss/main.scss --output public/css main.css",
     "build-server": "babel server/es6 --out-dir server/es5/",
     "watch-server": "babel server/es6 --out-dir server/es5/ --watch",
