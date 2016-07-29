@@ -1,8 +1,10 @@
 module.exports = function(grunt) {
 
   grunt.initConfig({
+    stylesdir: 'client/scss',
+    distdir: 'client/dist',
     jshint: {
-      files: ['public/app/**/*.js'],
+      files: ['client/app/**/*.js'],
       options: {
         globals: {
           jQuery: true
@@ -12,16 +14,18 @@ module.exports = function(grunt) {
     },
     watch: {
       styles: {
-        files: ['scss/**/*.scss'],
+        files: ['<%= stylesdir %>/**/*.scss'],
         tasks: ['sass']
+      },
+      html:  {
+        files: ['client/index.html'],
+        tasks: ['concat']
       }
     },
     concat: {
-      dist: {
-        src: [
-          'public/app/app.js'
-        ],
-        dest: 'public/dist/built.js'
+      html: {
+        src: ['client/index.html'],
+        dest: '<%= distdir %>/index.html'
       }
     },
     sass: {
@@ -30,7 +34,7 @@ module.exports = function(grunt) {
       },
       dist: {
         files: {
-          'public/dist/main.css': 'scss/main.scss'
+          '<%= distdir %>/main.css': '<%= stylesdir %>/main.scss'
         }
       }
     }
@@ -39,6 +43,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-sass');
 
   grunt.registerTask('default', ['jshint', 'concat', 'sass']);
