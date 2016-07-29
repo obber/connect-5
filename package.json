@@ -2,13 +2,13 @@
   "name": "connect-5-react",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/server.js",
+  "main": "server/es5/server.js",
   "scripts": {
-    "test": "./node_modules/jasmine-node/bin/jasmine-node ./spec",
-    "wp": "webpack --presets es2015,react",
+    "test": "jasmine-node ./spec --forceexit",
+    "wp": "webpack --presets es2015,react --watch",
     "build-css": "node-sass scss/main.scss --output public/css main.css",
-    "build-server": "babel server --out-dir dist/",
-    "watch-server": "babel server --out-dir dist/ --watch",
+    "build-server": "babel server/es6 --out-dir server/es5/",
+    "watch-server": "babel server/es6 --out-dir server/es5/ --watch",
     "watch": "grunt watch"
   },
   "repository": {
@@ -32,6 +32,7 @@
     "grunt-babel": "^6.0.0",
     "grunt-cli": "^1.2.0",
     "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-jshint": "^1.0.0",
     "grunt-contrib-watch": "^1.0.0",
     "grunt-sass": "^1.2.0",

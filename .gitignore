@@ -43,3 +43,6 @@ public/dist/
 
 # API Keys & Config Settings
 server/auth/config.js
+
+# DB File
+data/

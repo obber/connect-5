@@ -3,12 +3,12 @@ var webpack = require('webpack');
 
 module.exports = {
   entry: [
-    "./public/app/app.js"
+    "./client/src/app.js"
   ],
   output: {
-    path: path.resolve(__dirname, "public/dist"),
+    path: path.resolve(__dirname, "client/dist"),
     filename: "bundle.js",
-    publicPath: './public'
+    publicPath: './client'
   },
   resolve: {
     extensions: ['', '.js', '.jsx']
