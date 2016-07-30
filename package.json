@@ -5,8 +5,9 @@
   "main": "server/es5/server.js",
   "scripts": {
     "test": "jasmine-node ./spec --forceexit",
-    "wp": "webpack --presets es2015,react --watch",
-    "build": "grunt default && npm run build-server",
+    "wp": "webpack --presets es2015,react",
+    "wpw": "webpack --presets es2015,react --watch",
+    "build": "grunt default && npm run build-server && npm run wp",
     "build-server": "babel server/es6 --out-dir server/es5/",
     "watch-server": "babel server/es6 --out-dir server/es5/ --watch",
     "watch": "grunt watch"
@@ -42,8 +43,6 @@
     "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
-    "babel": "^6.5.2",
-    "babel-loader": "^6.2.4",
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "passport": "^0.3.2",
