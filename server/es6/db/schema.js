@@ -9,6 +9,6 @@ knex.schema.createTableIfNotExists('users', table => {
   table.string('lastname');
   table.string('email');
   table.string('password');
-}).then((result) => {
+}).then(() => {
   console.log('User schema created.');
 });

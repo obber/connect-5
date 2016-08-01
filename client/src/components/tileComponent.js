@@ -10,7 +10,7 @@ class Tile extends Component {
       <div className="tile">
         <p>{this.props.number}</p>
       </div>
-    )
+    );
   }
 }
 

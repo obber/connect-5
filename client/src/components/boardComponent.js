@@ -11,10 +11,10 @@ class Board extends Component {
     return (
       <div className="board">
         {this.props.info.map((num, i) => {
-          return <Tile number={num} key={i} />
+          return <Tile number={num} key={i} />;
         })}
       </div>
-    )
+    );
   }
 }
 

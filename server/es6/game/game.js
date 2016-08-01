@@ -5,6 +5,6 @@ const newGame = (socket1, socket2) => Object.assign({
   player2: newPlayer(socket2)
 }, gameMethods);
 
-const gameMethods = {
-  
-}
+const gameMethods = {}
+
+export default newGame;

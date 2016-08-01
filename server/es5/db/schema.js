@@ -9,6 +9,6 @@ _common.knex.schema.createTableIfNotExists('users', function (table) {
   table.string('lastname');
   table.string('email');
   table.string('password');
-}).then(function (result) {
+}).then(function () {
   console.log('User schema created.');
 }); // the database configuration is inside of server/common.js

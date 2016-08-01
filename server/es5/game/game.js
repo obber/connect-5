@@ -1,5 +1,9 @@
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
 var _player = require("./player");
 
 var _player2 = _interopRequireDefault(_player);
@@ -14,3 +18,5 @@ var newGame = function newGame(socket1, socket2) {
 };
 
 var gameMethods = {};
+
+exports.default = newGame;
