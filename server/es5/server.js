@@ -2,10 +2,6 @@
 
 var _common = require("./common");
 
-var _game = require("./game/game");
-
-var _game2 = _interopRequireDefault(_game);
-
 var _socketRoutes = require("./sockets/socketRoutes");
 
 var _socketRoutes2 = _interopRequireDefault(_socketRoutes);

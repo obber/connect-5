@@ -1,3 +1,2 @@
+// import { app } from "../common";
 "use strict";
-
-var _common = require("../common");

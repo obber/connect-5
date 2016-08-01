@@ -1,5 +1,4 @@
-import { server, app, io } from "./common";
-import Game from "./game/game";
+import { server, io } from "./common";
 import socketRoutes from "./sockets/socketRoutes";
 
 import "./auth/auth";
