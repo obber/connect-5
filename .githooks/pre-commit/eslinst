@@ -1,0 +1,2 @@
+./node_modules/.bin/eslint client/src/ --config .eslintrc.client.js
+./node_modules/.bin/eslint server/es6/ --config .eslintrc.server.js
