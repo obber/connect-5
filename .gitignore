@@ -40,6 +40,7 @@ jspm_packages
 main.css
 dist
 public/dist/
+server/es5/
 
 # API Keys & Config Settings
 server/auth/config.js
