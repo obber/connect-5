@@ -7,21 +7,20 @@ const baseUrl = "http://localhost:3456/";
 let options = {
   'transports': ['websocket'],
   'force new connection': true
-}
+};
 let client1, client2, client3;
 
 describe("socket.io connection", () => {
-  console.log('running tests');
-
   let clients = 0;
 
   it("allows a client to connect", (done) => {
     client1 = io.connect(baseUrl, options);
     client1.on('connect', () => {
       clients++;
+      expect(1).toEqual(1);
       done();
-    })
-  })
+    });
+  });
 
   it("allows multiple clients to connect", (done) => {
     client2 = io.connect(baseUrl, options);
