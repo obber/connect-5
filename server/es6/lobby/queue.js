@@ -4,7 +4,7 @@ const inQueue = {};
 // enqueue and dequeue both return an integer signifying player's position in queue.
 
 const enqueue = (socket) => {
-  if (inQueue(socket.id)) {
+  if (inQueue[socket.id]) {
     console.error('this socket is already in queue, but tried to enqueue. socket.id = ', socket.id);
     return -1;
   }
@@ -18,7 +18,7 @@ const enqueue = (socket) => {
 };
 
 const dequeue = (socket) => {
-  if (!inQueue(socket.id)) {
+  if (inQueue[socket.id] === undefined) {
     console.error('this socket is not in the queue, but tried to dequeue. socket.id = ', socket.id);
     return -1;
   }
