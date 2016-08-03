@@ -1,13 +1,10 @@
 'use strict';
 
-const request = require('request');
-const io = require('socket.io-client');
+var conf = require("./socket.config");
+var io = conf.io;
+var baseUrl = conf.baseUrl;
+var options = conf.options;
 
-const baseUrl = "http://localhost:3456/";
-let options = {
-  'transports': ['websocket'],
-  'force new connection': true
-};
 let client1, client2, client3;
 
 describe("socket.io connection", () => {
