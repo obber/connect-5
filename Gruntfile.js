@@ -5,10 +5,14 @@ module.exports = function(grunt) {
   require('load-grunt-tasks')(grunt);
 
   grunt.initConfig({
-    stylesdir: 'client/scss',
-    distdir: 'client/dist',
-    clientdir: 'client/src',
-    serverdir: 'server/es6',
+    // env config
+    stylesdir: 'src/client/scss',
+    clientdist: 'dist/client',
+    serverdist: 'dist/server',
+    clientsrc: 'src/client',
+    serversrc: 'src/server',
+
+    // watch task, used in grunt watch
     watch: {
       styles: {
         files: ['<%= stylesdir %>/**/*.scss'],
@@ -19,30 +23,36 @@ module.exports = function(grunt) {
         tasks: ['concat']
       },
       client: {
-        files: ['<%= clientdir %>/**/*.js'],
+        files: ['<%= clientsrc %>/**/*.js'],
         tasks: ['webpack']
       },
       server: {
-        files: ['<%= serverdir %>/**/*.js'],
+        files: ['<%= serversrc %>/**/*.js'],
         tasks: ['babel']
       }
     },
+
+    // only used to move src client html to dist
     concat: {
       html: {
-        src: ['client/index.html'],
-        dest: '<%= distdir %>/index.html'
+        src: ['<%= clientsrc %>/index.html'],
+        dest: '<%= clientdist %>/index.html'
       }
     },
+
+    // for sass
     sass: {
       options: {
         sourceMap: true,
       },
       dist: {
         files: {
-          '<%= distdir %>/main.css': '<%= stylesdir %>/main.scss'
+          '<%= clientdist %>/main.css': '<%= stylesdir %>/main.scss'
         }
       }
     },
+
+    // for babel
     babel: {
       options: {
         sourceMap: true,
@@ -51,19 +61,50 @@ module.exports = function(grunt) {
       server: {
         files: [{
           expand: true,
-          cwd: 'server/es6/',
+          cwd: '<%= serversrc %>',
           src: ['**/*.js'],
-          dest: 'server/es5'
+          dest: '<%= serverdist %>'
         }]
       }
     },
+
+    // webpack
+    webpack: {
+      client: {
+        entry: [
+          "./<%= clientsrc %>/js/app.js"
+        ],
+        output: {
+          path: "<%= clientdist %>",
+          filename: "bundle.js"
+        },
+        resolve: {
+          extensions: ['', '.js', '.jsx']
+        },
+        module: {
+          loaders: [
+            {
+              test: /\.js$/,
+              exclude: /node_modules/,
+              loader: 'babel',
+              query: {
+                presets: ['es2015', 'stage-0', 'react']
+              }
+            }
+          ]
+        },
+        exclude: '/node_modules/'
+      }
+    },
+
+    // linting
     eslint: {
       server: {
         options: {
           configFile: ".grunt/.eslintrc.server.js"
         },
         files: {
-          src: ["<%= serverdir %>/**/*.js"]
+          src: ["<%= serversrc %>/**/*.js"]
         }
       },
       client: {
@@ -71,15 +112,13 @@ module.exports = function(grunt) {
           configFile: ".grunt/.eslintrc.client.js"
         },
         files: {
-          src: ["<%= clientdir %>/**/*.js"]
+          src: ["<%= clientsrc %>/**/*.js"]
         }
       }
     }
   });
 
-  grunt.config('webpack', require('./webpack.config.js'));
-
   grunt.registerTask('default', ['concat', 'sass']);
-  grunt.registerTask('build', ['lint', 'concat', 'sass', 'babel', 'webpack']);
+  grunt.registerTask('build', ['eslint', 'concat', 'sass', 'babel', 'webpack']);
 
 };

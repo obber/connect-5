@@ -2,6 +2,7 @@ import bodyParser from "body-parser";
 import express from "express";
 import http from "http";
 import socketIo from "socket.io";
+import path from "path";
 
 const app = express();
 const server = http.Server(app);
@@ -14,6 +15,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // public directory
-app.use(express.static('./client/dist'));
+app.use(express.static(path.resolve('./dist/client')));
 
 export { app, server, io };

@@ -2,28 +2,24 @@
   "name": "connect-5-react",
   "version": "1.0.0",
   "description": "",
-  "main": "server/es5/server.js",
+  "main": "dist/server/server.js",
   "scripts": {
+    "start": "node dist/server/server.js",
     "test": "jasmine-node ./spec --forceexit",
-    "gwp": "grunt webpack",
     "lint": "grunt eslint",
-    "wp": "webpack",
-    "wpw": "webpack --watch",
     "build": "grunt build",
-    "build-server": "grunt babel",
-    "watch-server": "babel server/es6 --out-dir server/es5/ --watch",
     "watch": "grunt watch"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dthai92/connect-5-react.git"
+    "url": "git+https://github.com/Jadaka/connect-5.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/dthai92/connect-5-react/issues"
+    "url": "https://github.com/Jadaka/connect-5/issues"
   },
-  "homepage": "https://github.com/dthai92/connect-5-react#readme",
+  "homepage": "https://github.com/Jadaka/connect-5#readme",
   "devDependencies": {
     "babel-cli": "^6.11.4",
     "babel-core": "^6.11.4",
