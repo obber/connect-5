@@ -1,25 +1,30 @@
+var path = require('path');
+
 module.exports = function(grunt) {
+
+  require('load-grunt-tasks')(grunt);
 
   grunt.initConfig({
     stylesdir: 'client/scss',
     distdir: 'client/dist',
-    jshint: {
-      files: ['client/app/**/*.js'],
-      options: {
-        globals: {
-          jQuery: true
-        },
-        esversion: 6
-      }
-    },
+    clientdir: 'client/src',
+    serverdir: 'server/es6',
     watch: {
       styles: {
         files: ['<%= stylesdir %>/**/*.scss'],
         tasks: ['sass']
       },
-      html:  {
+      html: {
         files: ['client/index.html'],
         tasks: ['concat']
+      },
+      client: {
+        files: ['<%= clientdir %>/**/*.js'],
+        tasks: ['webpack']
+      },
+      server: {
+        files: ['<%= serverdir %>/**/*.js'],
+        tasks: ['babel']
       }
     },
     concat: {
@@ -37,15 +42,44 @@ module.exports = function(grunt) {
           '<%= distdir %>/main.css': '<%= stylesdir %>/main.scss'
         }
       }
+    },
+    babel: {
+      options: {
+        sourceMap: true,
+        presets: ['es2015']
+      },
+      server: {
+        files: [{
+          expand: true,
+          cwd: 'server/es6/',
+          src: ['**/*.js'],
+          dest: 'server/es5'
+        }]
+      }
+    },
+    eslint: {
+      server: {
+        options: {
+          configFile: ".grunt/.eslintrc.server.js"
+        },
+        files: {
+          src: ["<%= serverdir %>/**/*.js"]
+        }
+      },
+      client: {
+        options: {
+          configFile: ".grunt/.eslintrc.client.js"
+        },
+        files: {
+          src: ["<%= clientdir %>/**/*.js"]
+        }
+      }
     }
   });
 
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-sass');
+  grunt.config('webpack', require('./webpack.config.js'));
 
-  grunt.registerTask('default', ['jshint', 'concat', 'sass']);
+  grunt.registerTask('default', ['concat', 'sass']);
+  grunt.registerTask('build', ['lint', 'concat', 'sass', 'babel', 'webpack']);
 
 };
