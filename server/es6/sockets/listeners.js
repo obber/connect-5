@@ -1,10 +1,10 @@
 import { send } from './helpers';
 import queue from '../lobby/queue';
-import { cl, sv } from './events';
+import { sv } from './events';
 
 const enqueueListeners = (socket) => {
   console.log('heard enqueue');
-  let pos = queue.enqueue(socket);
+  const pos = queue.enqueue(socket);
   console.log('pos = ', pos);
   if (pos === -1) {
     socket.emit(sv.enqueue.name, send(false, "not added to queue"));
@@ -15,7 +15,7 @@ const enqueueListeners = (socket) => {
 
 const dequeueListeners = (socket) => {
   console.log('heard dequeue');
-  let pos = queue.dequeue(socket);
+  const pos = queue.dequeue(socket);
   if (pos === -1) {
     socket.emit(sv.dequeue.name, send(false, "not dequeued"));
   } else {

@@ -14,20 +14,15 @@ describe("queue socket events", () => {
 
   it("allows a client to enqueue", (done) => {
     client.emit('cl.enqueue');
-    console.log('cl.enqueue emitted');
     client.on('sv.enqueue', (pkt) => {
-      console.log('sv.enqueue was heard');
-      console.log('pkt = ', pkt);
       expect(pkt.success).toBe(true);
       done();
     });
   });
 
   it("allows a client to dequeue", (done) => {
-    console.log('cl.dequeue emitted');
     client.emit('cl.dequeue');
     client.on('sv.dequeue', (pkt) => {
-      console.log('sv.dequeue was heard');
       expect(pkt.success).toBe(true);
       done();
     });

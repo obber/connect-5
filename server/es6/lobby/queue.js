@@ -18,7 +18,7 @@ const enqueue = (socket) => {
 };
 
 const dequeue = (socket) => {
-  if (inQueue[socket.id] === undefined) {
+  if (typeof inQueue[socket.id] !== 'number') {
     console.error('this socket is not in the queue, but tried to dequeue. socket.id = ', socket.id);
     return -1;
   }
