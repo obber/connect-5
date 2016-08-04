@@ -11,6 +11,7 @@ module.exports = function(grunt) {
     serverdist: 'dist/server',
     clientsrc: 'src/client',
     serversrc: 'src/server',
+    specsrc: 'spec',
 
     // watch task, used in grunt watch
     watch: {
@@ -101,7 +102,7 @@ module.exports = function(grunt) {
     eslint: {
       server: {
         options: {
-          configFile: ".grunt/.eslintrc.server.js"
+          configFile: ".grunt/eslint.server.js"
         },
         files: {
           src: ["<%= serversrc %>/**/*.js"]
@@ -109,10 +110,18 @@ module.exports = function(grunt) {
       },
       client: {
         options: {
-          configFile: ".grunt/.eslintrc.client.js"
+          configFile: ".grunt/eslint.client.js"
         },
         files: {
           src: ["<%= clientsrc %>/**/*.js"]
+        }
+      },
+      spec: {
+        options: {
+          configFile: ".grunt/eslint.spec.js"
+        },
+        files: {
+          src: ["<%= specsrc %>/**/*.js"]
         }
       }
     }
