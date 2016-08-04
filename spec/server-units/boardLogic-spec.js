@@ -32,15 +32,15 @@ describe("boardLogic.isOpen", () => {
 describe("boardLogic.runCount", () => {
   it("detects invalid number of arguments", () => {
     expect(runCount).toThrow();
-    expect(() => runCount('a')).toThrow();
-    expect(() => runCount('a', 'b')).toThrow();
+    expect(() => runCount("a")).toThrow();
+    expect(() => runCount("a", "b")).toThrow();
   });
 
   it("detects invalid board", () => {
     expect(() => runCount([], "aa", "major")).toThrow(); 
-    expect(() => runCount(['asdf', "aa", "major"])).toThrow(); 
+    expect(() => runCount(["asdf", "aa", "major"])).toThrow(); 
     expect(() => {
-      runCount(new Array(19).fill( new Array(19).fill('a') ), "aa", "major")
+      runCount(new Array(19).fill( new Array(19).fill("a") ), "aa", "major");
     }).toThrow();
   });
 
@@ -92,7 +92,7 @@ describe("boardLogic.runCount", () => {
     expect(runCount(board, "dc", "major")).toBe(1);
   });
 
-  xit("returns the correct run count for horizontal runs", () => {
+  it("returns the correct run count for horizontal runs", () => {
     var board = new Array(19).fill(new Array(19).fill(0)).map(arr => arr.slice());
     // aa ab ac ad ae   00 01 02 03 04
     // ba bb bc bd be   10 11 12 13 14
@@ -123,7 +123,7 @@ describe("boardLogic.runCount", () => {
     expect(runCount(board, "ae", "horizontal")).toBe(5);
   });
 
-  xit("returns the correct run count for vertical runs", () => {
+  it("returns the correct run count for vertical runs", () => {
     var board = new Array(19).fill(new Array(19).fill(0)).map(arr => arr.slice());
     // aa ab ac ad ae   00 01 02 03 04
     // ba bb bc bd be   10 11 12 13 14
@@ -153,7 +153,7 @@ describe("boardLogic.runCount", () => {
     expect(runCount(board, "dd", "vertical")).toBe(5);
     expect(runCount(board, "ed", "vertical")).toBe(5);
 
-    board[5][3] = 2;
+    board[5][3] = 1;
     expect(runCount(board, "ad", "vertical")).toBe(5);
     expect(runCount(board, "bd", "vertical")).toBe(5);
     expect(runCount(board, "cd", "vertical")).toBe(5);
@@ -161,7 +161,7 @@ describe("boardLogic.runCount", () => {
     expect(runCount(board, "ed", "vertical")).toBe(5);
   });
 
-  xit("returns the correct run count for major runs", () => {
+  it("returns the correct run count for major runs", () => {
     var board = new Array(19).fill(new Array(19).fill(0)).map(arr => arr.slice());
     // aa ab ac ad ae   00 01 02 03 04
     // ba bb bc bd be   10 11 12 13 14
@@ -199,7 +199,7 @@ describe("boardLogic.runCount", () => {
     expect(runCount(board, "ee", "major")).toBe(5);
   });
 
-  xit("returns the correct run count for minor runs", () => {
+  it("returns the correct run count for minor runs", () => {
     var board = new Array(19).fill(new Array(19).fill(0)).map(arr => arr.slice());
     // aa ab ac ad ae   00 01 02 03 04
     // ba bb bc bd be   10 11 12 13 14

@@ -1,6 +1,6 @@
-import reactDOM from 'react-dom';
-import React from 'react';
-import Board from './components/boardComponent';
+import reactDOM from "react-dom";
+import React from "react";
+import Board from "./components/boardComponent";
 
 const data = (new Array(361)).fill(0).map((_, i) => {
   return i;
@@ -13,4 +13,4 @@ const Comp = () => {
   </div>);
 };
 
-reactDOM.render(<Comp />, document.getElementById('app'));
+reactDOM.render(<Comp />, document.getElementById("app"));

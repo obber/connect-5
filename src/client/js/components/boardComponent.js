@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import Tile from './tileComponent';
+import React, { Component } from "react";
+import Tile from "./tileComponent";
 
 class Board extends Component {
   constructor() {

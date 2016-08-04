@@ -15,6 +15,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // public directory
-app.use(express.static(path.resolve('./dist/client')));
+app.use(express.static(path.resolve("./dist/client")));
 
 export { app, server, io };

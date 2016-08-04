@@ -1,4 +1,5 @@
 import _ from "lodash";
+
 /**
  *  board.js
  *
@@ -19,7 +20,7 @@ const newBoard = () => {
   const state = {
     turn: null,
     winner: null,
-    board: _.map(outerArr, innerArr => innerArr.slice())
+    board: outerArr.map(row => row.slice())
   };
 
   // we bind our state object to every boardMethod so that the
@@ -30,27 +31,9 @@ const newBoard = () => {
 }
 
 const boardMethods = {
-  turn: (state) => {
-    return state.turn;
-  },
-
-  check: (state) => {
-    // todo: check board condition
-    return !!state.winner;
-  },
-
-  getState: (state) => {
-    // this function can become memory intensive since it deepclones.
-    // it is designed to retrieve board info for databse entries later
-
-    // we return a copy of state.board to maintain purity:
-    // mutations of the board outside of this file is to be avoided.
-    return _.cloneDeep(state);
-  },
-
-  add: (state, options) => {
-
-  }
+  turn: (state) => state.turn,
+  check: (state) => state.winner,
+  getState: (state) => _.cloneDeep(state)
 };
 
 export { newBoard };

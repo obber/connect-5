@@ -1,11 +1,11 @@
-import listeners from './listeners';
+import listeners from "./listeners";
 
 const cl = {};
 const sv = {};
 
 const events = [
-  'enqueue',
-  'dequeue'
+  "enqueue",
+  "dequeue"
 ];
 
 events.forEach((event) => {

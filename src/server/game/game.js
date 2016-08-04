@@ -8,10 +8,10 @@ const newGame = (socket1, socket2) => Object.assign({
 
 const gameMethods = {
   init: () => {
-    console.log('hi');
+    console.log("hi");
   },
   end: () => {
-    console.log('hi');
+    console.log("hi");
   }
 }
 
