@@ -1,6 +1,7 @@
 import newPlayer from "./player";
 import newBoard from "./board/board";
 import { cl } from "./gameEvents";
+import { serverEmitters } from "./gameEmitters";
 import _ from "lodash";
 
 const newGame = (socket1, socket2) => {
@@ -12,7 +13,7 @@ const newGame = (socket1, socket2) => {
   };
 
   return Object.assign(
-    game, 
+    game,
     _.mapValues(gameMethods, method => method.bind(null, game))
   );
 
@@ -20,21 +21,29 @@ const newGame = (socket1, socket2) => {
 
 const gameMethods = {
   init: (game) => {
+    // set up emitters
+    game.emit = _.mapValues(serverEmitters, emitter => emitter.bind(null, game));
+
+    // set up event listeners
     game.listen();
-    game.player1.socket.emit("gameInitialized");
-    game.player2.socket.emit("gameInitialized");
+
+    // tell the clients that the game has been initialize
+    game.emit.gameInitialized();
   },
 
   listen: (game) => {
+    const socket1 = game.player1.socket;
+    const socket2 = game.player2.socket;
+
     // bring in the event listeners from gameEvents
     _.each(cl, (event) => {
-      game.player1.socket.on(event.name, event.cb.bind(null, game.player1.socket));
-      game.player2.socket.on(event.name, event.cb.bind(null, game.player2.socket));
+      socket1.on(event.name, event.cb.bind(null, { game, "socket": socket1 }));
+      socket2.on(event.name, event.cb.bind(null, { game, "socket": socket2 }));
     });
 
     // add disconnect listeners
-    game.player1.socket.on("disconnect", game.disconnect);
-    game.player2.socket.on("disconnect", game.disconnect);
+    socket1.on("disconnect", game.disconnect);
+    socket2.on("disconnect", game.disconnect);
   },
 
   disconnect: () => {

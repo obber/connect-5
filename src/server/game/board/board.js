@@ -15,13 +15,15 @@ import { idToCoordinates, isOpen, runCount } from "./boardLogic";
 
 const newBoard = () => {
 
-  const innerArr = new Array(19).fill(0);
-  const outerArr = new Array(19).fill(innerArr);
+  const eachRow = new Array(19).fill(0);
+  const board = new Array(19)
+    .fill(eachRow)
+    .map(row => row.slice());
 
   const state = {
     turn: 1,
     winner: null,
-    board: outerArr.map(row => row.slice())
+    board: board
   };
 
   // we bind our state object to every boardMethod so that the
@@ -36,6 +38,7 @@ const boardMethods = {
   check: (state) => state.winner,
   getState: (state) => _.cloneDeep(state),
   add: (state, tileId) => {
+    // edge cases:
     if (!isOpen(tileId)) {
       throw new Error(`board.add called, but ${tileId} is occupied.`);
     } else if (state.winner) {
@@ -49,8 +52,9 @@ const boardMethods = {
     // check for winning tile
     const runs = ["horizontal", "vertical", "major", "minor"]
       .map((direction) => runCount(state.board, tileId, direction));
-
     const maxRun = Math.max(...runs);
+
+    // if winner
     if (maxRun >= 5) {
       state.winner = state.turn;
 

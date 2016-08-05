@@ -1,17 +1,93 @@
 "use strict";
 
-var conf = require("./socket.config");
-var io = conf.io;
-var baseUrl = conf.baseUrl;
-var options = conf.options;
+const _ = require("lodash");
 
-describe("queue socket events", () => {
-  var c1 = io.connect(baseUrl, options);
-  var c2 = io.connect(baseUrl, options);
+const conf = require("./socket.config");
+const io = conf.io;
+const baseUrl = conf.baseUrl;
+const options = conf.options;
 
-  it("testing", () => {
+let c1 = io.connect(baseUrl, options);
+let c2 = io.connect(baseUrl, options);
+
+describe("game-related socket endpoints:", () => {
+
+  it("cl.enqueue event should receive back a sv.enqueue event & sv.gameInitialized event", done => {
+    let enqueueCount = 0;
+    let gameInitCount = 0;
+    
+    const test = _.after(4, () => {
+      expect(enqueueCount).toBe(2);
+      expect(gameInitCount).toBe(2);
+      done();
+    });
+
     c1.emit("cl.enqueue");
     c2.emit("cl.enqueue");
+
+    c1.on("sv.enqueue", () => {
+      enqueueCount++;
+      test();
+    });
+    c1.on("sv.gameInitialized", () => {
+      gameInitCount++;
+      test();
+    });
+
+    c2.on("sv.enqueue", () => {
+      enqueueCount++;
+      test();
+    });
+    c2.on("sv.gameInitialized", () => {
+      gameInitCount++;
+      test();
+    });
+  });
+
+  it("cl.gameReady event should receive back a sv.gameReady event", done => {
+    let gameReadyCount = 0;
+
+    const test = _.after(2, () => {
+      expect(gameReadyCount).toBe(2);
+      done();
+    });
+
+    c1.emit("cl.gameReady");
+    c2.emit("cl.gameReady");
+
+    c1.on("sv.gameReady", () => {
+      gameReadyCount++;
+      test();
+    });
+    c2.on("sv.gameReady", () => {
+      gameReadyCount++;
+      test();
+    });
+  });
+
+  it("sv.gameReady should send a packet with a playerId", done => {
+    const test = _.after(2, () => {
+      done();
+    });
+    c1 = io.connect(baseUrl, options);
+    c2 = io.connect(baseUrl, options);
+    c1.emit("cl.enqueue");
+    c2.emit("cl.enqueue");
+    c1.on("sv.gameInitialized", () => {
+      c1.emit("cl.gameReady");
+    });
+    c2.on("sv.gameInitialized", () => {
+      c2.emit("cl.gameReady");
+    });
+
+    c1.on("sv.gameReady", (pkt) => {
+      expect(pkt).toBeDefined();
+      test();
+    });
+    c2.on("sv.gameReady", (pkt) => {
+      expect(pkt).toBeDefined();
+      test();
+    });
   });
 
 });

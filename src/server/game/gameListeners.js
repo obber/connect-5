@@ -1,9 +1,11 @@
-// import { send } from "../modules/helpers";
-// import { sv } from "./gameEvents";
+const gameReadyListener = ({ game, socket }) => {
+  if (game.player1.socket.id === socket.id) {
+    game.player1.ready = true;
+  } else {
+    game.player2.ready = true;
+  }
 
-const gameReadyListener = () => {
-  console.log("cl.gameReady heard");
-  return true;
+  game.emit.gameReady();
 };
 
 const turnOverListener = () => {

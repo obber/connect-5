@@ -5,6 +5,7 @@ const idToCoordinates = (tileId) => (
 
   // the first character repsents the column index
   // the second character represents the row index
+  
   {
     x: tileId.charCodeAt(1) - 97, 
     y: tileId.charCodeAt(0) - 97
@@ -13,14 +14,15 @@ const idToCoordinates = (tileId) => (
 
 const isOpen = (board, tileId) => {
   // returns boolean indicating whether a board is open at that slot
+
   const { x, y } = idToCoordinates(tileId);
   return board[y][x] === 0;
 };
 
 const runCount = (board, tileId, direction) => {
-  const { x, y } = idToCoordinates(tileId);
+  // given a direction, returns the consecutive run count that the id is a part of
 
-  // returns the consecutive run count that the id is a part of
+  const { x, y } = idToCoordinates(tileId);
   let count = 1;
   let player = 0;
 

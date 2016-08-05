@@ -1,5 +1,6 @@
 const newPlayer = (socket) => ({
-  socket: socket
+  socket: socket,
+  ready: false
 });
 
 export default newPlayer;

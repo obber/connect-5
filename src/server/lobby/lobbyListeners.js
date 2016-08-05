@@ -3,7 +3,6 @@ import { enqueue, dequeue } from "./queue";
 import { sv } from "./lobbyEvents";
 
 const enqueueListener = (socket) => {
-  console.log("typeof socket =", typeof socket);
   const pos = enqueue(socket);
   if (pos === -1) {
     socket.emit(sv.enqueue.name, send(false, "not added to queue"));
