@@ -9,14 +9,14 @@ const newGame = (socket1, socket2) => {
     player1: newPlayer(socket1),
     player2: newPlayer(socket2),
     ctrl: newBoard()
-  }
+  };
 
   return Object.assign(
     game, 
-    _.mapValues(gameMethods, method => method.bind(game, game))
+    _.mapValues(gameMethods, method => method.bind(null, game))
   );
 
-}
+};
 
 const gameMethods = {
   init: (game) => {
@@ -44,6 +44,6 @@ const gameMethods = {
   end: () => {
     console.log("game ended");
   }
-}
+};
 
 export default newGame;

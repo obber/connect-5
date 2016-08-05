@@ -29,7 +29,7 @@ const newBoard = () => {
   return Object.assign({}, 
     _.mapValues(boardMethods, method => method.bind(null, state))
   );
-}
+};
 
 const boardMethods = {
   turn: (state) => state.turn,

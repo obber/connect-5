@@ -12,10 +12,10 @@ lobbyEvents.forEach((event) => {
   cl[event] = {
     name: `cl.${event}`,
     cb: lobbyListeners[`${event}Listener`]
-  }
+  };
   sv[event] = {
     name: `sv.${event}`
-  }
+  };
 });
 
 export { cl, sv };
