@@ -1,5 +1,5 @@
 import { server, io } from "./common";
-import socketRoutes from "./sockets/routes";
+import socketRoutes from "./socketRoutes";
 
 import "./auth/auth";
 

@@ -1,34 +1,41 @@
+import newGame from "../game/game";
+
 const queue = [];
-const inQueue = {};
 
 // enqueue and dequeue both return an integer signifying player"s position in queue.
 
 const enqueue = (socket) => {
-  if (inQueue[socket.id]) {
+  if (queue.indexOf(socket) >= 0) {
     console.error("this socket is already in queue, but tried to enqueue. socket.id = ", socket.id);
     return -1;
   }
 
-  // store socket in obj for fast lookup
-  // store the position in queue as well.
-  inQueue[socket.id] = queue.length;
   // store socket in queue 
   queue.push(socket);
-  return inQueue[socket.id];
+
+  // return position in queue
+  return queue.length - 1;
 };
 
 const dequeue = (socket) => {
-  if (typeof inQueue[socket.id] !== "number") {
+  if (queue.indexOf(socket) === -1) {
     console.error("this socket is not in the queue, but tried to dequeue. socket.id = ", socket.id);
     return -1;
   }
 
-  // remove socket from obj and queue
-  var position = inQueue[socket.id];
-  delete inQueue[socket.id];
   // we return the 0th position of splice, since splice returns an array of removed items.
   // it also manipulates the array.
-  return queue.splice(position, 1)[0];
+  return queue.shift();
 };
 
-export default { enqueue, dequeue };
+// every 3 seconds, we want to pair ppl from the queue and dequeue them into a game.
+setInterval(() => {
+  while (queue.length >= 2) {
+    const player1 = dequeue(queue[0]);
+    const player2 = dequeue(queue[0]);
+    var game = newGame(player1, player2);
+    game.init();
+  }
+}, 1000);
+
+export { enqueue, dequeue };

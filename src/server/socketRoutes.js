@@ -1,4 +1,4 @@
-import { cl } from "./events";
+import { cl } from "./lobby/lobbyEvents";
 import _ from "lodash";
 
 const socketRoutes = (socket) => {

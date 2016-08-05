@@ -96,4 +96,4 @@ const runCount = (board, tileId, direction) => {
   return count;
 }
 
-export { runCount, isOpen };
+export { idToCoordinates, runCount, isOpen };
