@@ -102,7 +102,7 @@ module.exports = function(grunt) {
     eslint: {
       server: {
         options: {
-          configFile: ".grunt/eslint.server.js"
+          configFile: ".eslint/eslint.server.js"
         },
         files: {
           src: ["<%= serversrc %>/**/*.js"]
@@ -110,7 +110,7 @@ module.exports = function(grunt) {
       },
       client: {
         options: {
-          configFile: ".grunt/eslint.client.js"
+          configFile: ".eslint/eslint.client.js"
         },
         files: {
           src: ["<%= clientsrc %>/**/*.js"]
@@ -118,7 +118,7 @@ module.exports = function(grunt) {
       },
       spec: {
         options: {
-          configFile: ".grunt/eslint.spec.js"
+          configFile: ".eslint/eslint.spec.js"
         },
         files: {
           src: ["<%= specsrc %>/**/*.js"]
