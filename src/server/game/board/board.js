@@ -35,8 +35,11 @@ const newBoard = () => {
 
 const boardMethods = {
   turn: (state) => state.turn,
+
   check: (state) => state.winner,
+
   getBoard: (state) => _.cloneDeep(state.board),
+  
   add: (state, tileId) => {
     // edge cases:
     if (!tileId) {
