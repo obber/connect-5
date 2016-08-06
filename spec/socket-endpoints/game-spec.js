@@ -65,7 +65,7 @@ describe("game-related socket endpoints:", () => {
     });
   });
 
-  it("sv.gameReady should send a packet with a playerId", done => {
+  it("sv.gameReady should send a packet with a playerId, initial board, & turn", done => {
     const test = _.after(2, () => {
       done();
     });
@@ -79,13 +79,37 @@ describe("game-related socket endpoints:", () => {
     c2.on("sv.gameInitialized", () => {
       c2.emit("cl.gameReady");
     });
-
     c1.on("sv.gameReady", (pkt) => {
       expect(pkt).toBeDefined();
+      expect(pkt.board).toBeDefined();
+      expect(pkt.turn).toBe(true);
       test();
     });
     c2.on("sv.gameReady", (pkt) => {
       expect(pkt).toBeDefined();
+      expect(pkt.board).toBeDefined();
+      expect(pkt.turn).toBe(false);
+      test();
+    });
+  });
+
+  it("cl.turnOver should receive a sv.turnOver in response and toggle the turn", done => {
+    const test = _.after(2, () => {
+      done();
+    });
+    c1.emit("cl.turnOver", {
+      tileId: "bb"
+    });
+    c1.on("sv.turnOver", (pkt) => {
+      expect(pkt).toBeDefined();
+      expect(pkt.board).toBeDefined();
+      expect(pkt.turn).toBe(false);
+      test();
+    });
+    c2.on("sv.turnOver", (pkt) => {
+      expect(pkt).toBeDefined();
+      expect(pkt.board).toBeDefined();
+      expect(pkt.turn).toBe(true);
       test();
     });
   });

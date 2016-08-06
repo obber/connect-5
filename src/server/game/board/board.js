@@ -36,10 +36,12 @@ const newBoard = () => {
 const boardMethods = {
   turn: (state) => state.turn,
   check: (state) => state.winner,
-  getState: (state) => _.cloneDeep(state),
+  getBoard: (state) => _.cloneDeep(state.board),
   add: (state, tileId) => {
     // edge cases:
-    if (!isOpen(tileId)) {
+    if (!tileId) {
+      throw new Error(`tileId is not defined. tileId = ${tileId}`);
+    } else if (!isOpen(state.board, tileId)) {
       throw new Error(`board.add called, but ${tileId} is occupied.`);
     } else if (state.winner) {
       throw new Error(`board.add called, but ${state.turn} has already won.`);
@@ -47,7 +49,7 @@ const boardMethods = {
 
     // mutate the board state here.
     const { x, y } = idToCoordinates(tileId);
-    state[y][x] = state.turn;
+    state.board[y][x] = state.turn;
 
     // check for winning tile
     const runs = ["horizontal", "vertical", "major", "minor"]
@@ -63,6 +65,8 @@ const boardMethods = {
       // 1 becomes 2, 2 becomes 1
       state.turn = (state.turn % 2) + 1;
     }
+
+    return true;
   }
 };
 

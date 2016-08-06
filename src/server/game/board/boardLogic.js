@@ -14,7 +14,6 @@ const idToCoordinates = (tileId) => (
 
 const isOpen = (board, tileId) => {
   // returns boolean indicating whether a board is open at that slot
-
   const { x, y } = idToCoordinates(tileId);
   return board[y][x] === 0;
 };
