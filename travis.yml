@@ -1,0 +1,11 @@
+language: node_js
+node_js:
+- "6"
+install:
+- npm install
+before_script:
+- npm run build
+- npm run lint
+- npm start &
+script:
+- npm test

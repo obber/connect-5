@@ -8,8 +8,7 @@
     "test": "jasmine-node ./spec --forceexit",
     "lint": "grunt eslint",
     "build": "grunt build",
-    "watch": "grunt watch",
-    "postinstall": "npm run build && npm test"
+    "watch": "grunt watch"
   },
   "repository": {
     "type": "git",
