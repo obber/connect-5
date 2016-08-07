@@ -69,35 +69,6 @@ module.exports = function(grunt) {
       }
     },
 
-    // webpack
-    webpack: {
-      client: {
-        entry: [
-          "./<%= clientsrc %>/js/app.js"
-        ],
-        output: {
-          path: "<%= clientdist %>",
-          filename: "bundle.js"
-        },
-        resolve: {
-          extensions: ['', '.js', '.jsx']
-        },
-        module: {
-          loaders: [
-            {
-              test: /\.js$/,
-              exclude: /node_modules/,
-              loader: 'babel',
-              query: {
-                presets: ['es2015', 'stage-0', 'react']
-              }
-            }
-          ]
-        },
-        exclude: '/node_modules/'
-      }
-    },
-
     // linting
     eslint: {
       server: {
@@ -126,6 +97,9 @@ module.exports = function(grunt) {
       }
     }
   });
+
+  // webpack
+  grunt.config('webpack', require("./webpack.config.js"));
 
   grunt.registerTask('default', ['concat', 'sass']);
   grunt.registerTask('build', ['eslint', 'concat', 'sass', 'babel', 'webpack']);
