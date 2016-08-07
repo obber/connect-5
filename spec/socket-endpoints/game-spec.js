@@ -101,17 +101,167 @@ describe("game-related socket endpoints:", () => {
       tileId: "bb"
     });
     c1.on("sv.turnOver", (pkt) => {
-      expect(pkt).toBeDefined();
-      expect(pkt.board).toBeDefined();
-      expect(pkt.turn).toBe(false);
+      const result = _.cloneDeep(pkt);
+      expect(result).toBeDefined();
+      expect(result.board).toBeDefined();
+      expect(result.turn).toBe(false);
       test();
     });
     c2.on("sv.turnOver", (pkt) => {
-      expect(pkt).toBeDefined();
-      expect(pkt.board).toBeDefined();
-      expect(pkt.turn).toBe(true);
+      const result = _.cloneDeep(pkt);
+      expect(result).toBeDefined();
+      expect(result.board).toBeDefined();
+      expect(result.turn).toBe(true);
       test();
     });
   });
-
 });
+
+// we delay the next set of test suites to ensure a different game.
+setTimeout(() => {
+
+  let c3 = io.connect(baseUrl, options);
+  let c4 = io.connect(baseUrl, options);
+
+  describe("A full game, server-side only:", () => {
+
+    it("should be able to detect when a player has won", done => {
+
+      const test = _.after(2, () => {
+        done();
+      });
+
+      c3.on("sv.gameInitialized", () => {
+        c3.emit("cl.gameReady");
+        c3.on("sv.gameReady", () => {
+          gameStart();
+        });
+      });
+      c4.on("sv.gameInitialized", () => {
+        c4.emit("cl.gameReady");
+        c4.on("sv.gameReady", () => {
+          gameStart();
+        });
+      });
+
+      c3.emit("cl.enqueue");
+      c4.emit("cl.enqueue");
+
+      const gameStart = _.after(2, () => {
+        setTimeout(() => {
+          c3.emit("cl.turnOver", { tileId: "aa" });
+        }, 0);
+        setTimeout(() => {
+          c4.emit("cl.turnOver", { tileId: "ba" });
+        }, 50);
+        setTimeout(() => {
+          c3.emit("cl.turnOver", { tileId: "ab" });
+        }, 100);
+        setTimeout(() => {
+          c4.emit("cl.turnOver", { tileId: "bb" });
+        }, 150);
+        setTimeout(() => {
+          c3.emit("cl.turnOver", { tileId: "ac" });
+        }, 200);
+        setTimeout(() => {
+          c4.emit("cl.turnOver", { tileId: "bc" });
+        }, 250);
+        setTimeout(() => {
+          c3.emit("cl.turnOver", { tileId: "ad" });
+        }, 300);
+        setTimeout(() => {
+          c4.emit("cl.turnOver", { tileId: "bd" });
+        }, 350);
+        setTimeout(() => {
+          c3.emit("cl.turnOver", { tileId: "ae" });
+        }, 400);
+      });
+
+      c3.on("sv.gameOver", pkt => {
+        expect(pkt.win).toBe(true);
+        test();
+      });
+      c4.on("sv.gameOver", pkt => {
+        expect(pkt.win).toBe(false);
+        test();
+      });
+    });
+  });
+
+}, 200);
+
+// we delay the next set of test suites to ensure a different game.
+setTimeout(() => {
+
+  let c5 = io.connect(baseUrl, options);
+  let c6 = io.connect(baseUrl, options);
+
+  describe("A full game, server-side only:", () => {
+
+    it("should be able to detect when a player has won", done => {
+
+      const test = _.after(2, () => {
+        done();
+      });
+
+      c5.on("sv.gameInitialized", () => {
+        c5.emit("cl.gameReady");
+        c5.on("sv.gameReady", () => {
+          gameStart();
+        });
+      });
+      c6.on("sv.gameInitialized", () => {
+        c6.emit("cl.gameReady");
+        c6.on("sv.gameReady", () => {
+          gameStart();
+        });
+      });
+
+      c5.emit("cl.enqueue");
+      c6.emit("cl.enqueue");
+
+      const gameStart = _.after(2, () => {
+        setTimeout(() => {
+          c5.emit("cl.turnOver", { tileId: "ba" });
+        }, 0);
+        setTimeout(() => {
+          c6.emit("cl.turnOver", { tileId: "aa" });
+        }, 50);
+        setTimeout(() => {
+          c5.emit("cl.turnOver", { tileId: "bc" });
+        }, 100);
+        setTimeout(() => {
+          c6.emit("cl.turnOver", { tileId: "bb" });
+        }, 150);
+        setTimeout(() => {
+          c5.emit("cl.turnOver", { tileId: "bd" });
+        }, 200);
+        setTimeout(() => {
+          c6.emit("cl.turnOver", { tileId: "dd" });
+        }, 250);
+        setTimeout(() => {
+          c5.emit("cl.turnOver", { tileId: "be" });
+        }, 300);
+        setTimeout(() => {
+          c6.emit("cl.turnOver", { tileId: "ee" });
+        }, 350);
+        setTimeout(() => {
+          c5.emit("cl.turnOver", { tileId: "bf" });
+        }, 400);
+        setTimeout(() => {
+          c6.emit("cl.turnOver", { tileId: "cc" });
+        }, 450);
+      });
+
+      c5.on("sv.gameOver", pkt => {
+        expect(pkt.win).toBe(false);
+        test();
+      });
+      c6.on("sv.gameOver", pkt => {
+        expect(pkt.win).toBe(true);
+        test();
+      });
+    });
+  });
+
+}, 400);

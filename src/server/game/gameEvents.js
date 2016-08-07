@@ -1,7 +1,6 @@
 import gameListeners from "./gameListeners";
 
 const cl = {};
-const sv = {};
 
 const gameEvents = [
   "gameReady",
@@ -16,4 +15,4 @@ gameEvents.forEach((event) => {
   };
 });
 
-export { cl, sv };
+export { cl };

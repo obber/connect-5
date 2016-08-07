@@ -5,14 +5,22 @@ const gameReadyListener = ({ game, player }) => {
 
 const turnOverListener = ({ game, player }, pkt) => {
   if (game.ctrl.turn() !== player.id) {
-    throw new Error("turnOver was heard from the wrong client!");
+    player.socket.emit("sv.error", {
+      message: "it's not your turn."
+    });
+    throw new Error("cl.turnOver heard from the wrong player. pkt = ", pkt);
   } else if (!pkt) {
-    throw new Error("no packet was received from the cl.turnOver event. pkt = ", pkt);
+    throw new Error("No packet was received from the cl.turnOver event. pkt = ", pkt);
   }
 
   // add returns us true if adding is successful
   if (game.ctrl.add(pkt.tileId)) {
-    game.emit.turnOver();
+    // check for winner
+    if (game.ctrl.check()) {
+      game.emit.gameOver();
+    } else {
+      game.emit.turnOver();
+    }
   }
 };
 

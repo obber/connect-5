@@ -31,6 +31,20 @@ const gameEmitters = {
       board: currentBoard,
       turn: nextTurn === 2
     });
+  },
+
+  gameOver: (game) => {
+    const currentBoard = game.ctrl.getBoard();
+    const winner = game.ctrl.check();
+
+    game.player1.socket.emit("sv.gameOver", {
+      board: currentBoard,
+      win: winner === 1
+    });    
+    game.player2.socket.emit("sv.gameOver", {
+      board: currentBoard,
+      win: winner === 2
+    });
   }
 
 };

@@ -15,9 +15,8 @@ import { idToCoordinates, isOpen, runCount } from "./boardLogic";
 
 const newBoard = () => {
 
-  const eachRow = new Array(19).fill(0);
   const board = new Array(19)
-    .fill(eachRow)
+    .fill(new Array(19).fill(0))
     .map(row => row.slice());
 
   const state = {
@@ -39,7 +38,7 @@ const boardMethods = {
   check: (state) => state.winner,
 
   getBoard: (state) => _.cloneDeep(state.board),
-  
+
   add: (state, tileId) => {
     // edge cases:
     if (!tileId) {
@@ -62,8 +61,6 @@ const boardMethods = {
     // if winner
     if (maxRun >= 5) {
       state.winner = state.turn;
-
-    // if no winner
     } else {
       // 1 becomes 2, 2 becomes 1
       state.turn = (state.turn % 2) + 1;
