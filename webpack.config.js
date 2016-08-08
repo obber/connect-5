@@ -28,5 +28,27 @@ module.exports = {
     plugins: [
       new webpack.HotModuleReplacementPlugin()
     ]
+  },
+  production: {
+    entry: [
+      "./src/client/js/index.js"
+    ],
+    output: {
+      path: path.resolve("./dist/client"),
+      filename: "bundle.js",
+    },
+    resolve: {
+      extensions: ["", ".js", ".jsx"]
+    },
+    module: {
+      loaders: [
+        {
+          test: /\.js$/,
+          exclude: /node_modules/,
+          loaders: ["babel"]
+        }
+      ]
+    },
+    exclude: "/node_modules/"
   }
 }
