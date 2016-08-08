@@ -1,10 +1,9 @@
-import reactDOM from "react-dom";
 import React, { Component } from "react";
 
 import Board from "./components/boardComponent";
 import { connectSocket, socket } from "./socket.config";
 
-class Comp extends Component {
+class App extends Component {
   constructor() {
     super();
 
@@ -48,4 +47,4 @@ class Comp extends Component {
   }
 }
 
-reactDOM.render(<Comp />, document.getElementById("app"));
+export default App;

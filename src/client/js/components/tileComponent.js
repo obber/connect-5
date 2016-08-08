@@ -1,17 +1,12 @@
-import React, { Component } from "react";
+import React from "react";
+// import indexToTileId from "../modules/indexToTileId";
 
-class Tile extends Component {
-  constructor() {
-    super();
-  }
-
-  render() {
-    return (
-      <div className="tile">
-        <p>{this.props.number}</p>
-      </div>
-    );
-  }
-}
+const Tile = ({tile}) => {
+  return (
+    <div className="board-tile">
+      {tile}
+    </div>
+  );
+};
 
 export default Tile;

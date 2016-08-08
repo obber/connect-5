@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-
 import { socket } from "../socket.config";
+
+import Row from "./rowComponent";
 
 class Board extends Component {
   constructor() {
@@ -15,7 +16,6 @@ class Board extends Component {
   }
 
   componentDidMount() {
-    socket.emit("cl.gameReady");
 
     socket.on("sv.gameReady", pkt => {
       this.setState({
@@ -27,6 +27,8 @@ class Board extends Component {
     });
 
     socket.on("sv.turnOver");
+
+    socket.emit("cl.gameReady");
   }
 
   render() {
@@ -39,7 +41,12 @@ class Board extends Component {
     } else {
       return (
         <div className="board">
-          <h1>Board here</h1>
+          {this.state.board.map((row, rowIndex) => {
+            return <Row
+              rowData={row}
+              key={rowIndex}
+              rowIndex={rowIndex} />;
+          })}
         </div>
       );
     }
@@ -47,7 +54,3 @@ class Board extends Component {
 }
 
 export default Board;
-
-// {this.props.info.map((num, i) => {
-//   return <Tile number={num} key={i} />;
-// })}

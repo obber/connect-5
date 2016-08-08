@@ -1,6 +1,37 @@
 .board {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
   width: 572px;
+}
+
+.board-row {
+  
+}
+
+.board-tile {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  vertical-align: middle;
+}
+
+.board-row-even .board-tile {
+  &:nth-child(even) {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+
+  &:nth-child(odd) {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+}
+
+.board-row-odd .board-tile {
+  &:nth-child(even) {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  &:nth-child(odd) {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
 }
