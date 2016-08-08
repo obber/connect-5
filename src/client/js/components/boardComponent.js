@@ -26,7 +26,12 @@ class Board extends Component {
       });
     });
 
-    socket.on("sv.turnOver");
+    socket.on("sv.turnOver", pkt => {
+      this.setState({
+        turn: pkt.turn,
+        board: pkt.board
+      });
+    });
 
     socket.emit("cl.gameReady");
   }
@@ -45,7 +50,9 @@ class Board extends Component {
             return <Row
               rowData={row}
               key={rowIndex}
-              rowIndex={rowIndex} />;
+              rowIndex={rowIndex}
+              turn={this.state.turn}
+            />;
           })}
         </div>
       );

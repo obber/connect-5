@@ -1,7 +1,7 @@
 import React from "react";
 import Tile from "./tileComponent";
 
-const Row = ({ rowData, rowIndex }) => {
+const Row = ({ rowData, rowIndex, turn }) => {
   const evenOrOdd = rowIndex % 2 === 0 ? "board-row-even" : "board-row-odd";
 
   return (
@@ -11,7 +11,8 @@ const Row = ({ rowData, rowIndex }) => {
           tile={tile}
           key={columnIndex}
           rowIndex={rowIndex}
-          columnIndex={columnIndex} />;
+          columnIndex={columnIndex}
+          turn={turn} />;
       })}
     </div>
   );
