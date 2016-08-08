@@ -11,11 +11,15 @@ class Board extends Component {
       start: false,
       id: null,
       turn: null,
-      board: null
+      board: null,
+      message: null
     };
   }
 
-  componentDidMount() {
+  componentWillMount() {
+    socket.on("sv.gameInitialized", () => {
+      socket.emit("cl.gameReady");
+    });
 
     socket.on("sv.gameReady", pkt => {
       this.setState({
@@ -33,19 +37,21 @@ class Board extends Component {
       });
     });
 
-    socket.emit("cl.gameReady");
+    socket.on("sv.gameOver", pkt => {
+      this.setState({
+        board: pkt.board,
+        message: pkt.win ? "You win!" : "You lose."
+      });
+    });
   }
 
   render() {
     if (!this.state.start) {
-      return (
-        <div>
-          <h1>Preparing for battle...</h1>
-        </div>
-      );
+      return <h1>Preparing for battle...</h1>;
     } else {
       return (
         <div className="board">
+          <div className="message">{this.state.message ? this.state.message : ""}</div>
           {this.state.board.map((row, rowIndex) => {
             return <Row
               rowData={row}

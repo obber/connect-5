@@ -29,23 +29,30 @@ class Tile extends Component {
   }
 
   handleClick(tileId) {
-    // only if it's the player's turn & the tile is available
-    if (this.props.turn && this.props.tile === 0) {
-      // send a socket signal determining player's move
-      socket.emit("cl.turnOver", { tileId });
-    } else {
-      throw new Error("Not your turn, or that tile is taken");
+    if (!this.props.turn) {
+      throw new Error("Not your turn.");
+    } else if (this.props.tile !== 0) {
+      throw new Error("That tile is taken.");
     }
+
+    // send a socket signal determining player's move
+    socket.emit("cl.turnOver", { tileId });
   }
 
   render() {
+    let className = "board-tile";
+    if (this.props.tile === 1) {
+      className += " tile-1";
+    } else if (this.props.tile === 2) {
+      className += " tile-2";
+    }
+
     return (
       <div
-        className={this.state.className}
+        className={className}
         id={this.state.id}
-        onClick={this.handleClick.bind(this, this.state.id)}
-      >
-        {this.props.tile}
+        onClick={this.handleClick.bind(this, this.state.id)} >
+        <div className="piece"></div>
       </div>
     );
   }

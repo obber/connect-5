@@ -8,7 +8,7 @@ class App extends Component {
     super();
 
     this.state = {
-      inGame: false
+      inQueue: false
     };
 
     // bindings
@@ -20,17 +20,15 @@ class App extends Component {
   }
 
   handleClick() {
-    socket.on("sv.gameInitialized", () => {
-      this.setState({
-        inGame: true
-      });
-    });
-
     socket.emit("cl.enqueue");
+
+    this.setState({
+      inQueue: true
+    });
   }
 
   render () {
-    if (this.state.inGame) {
+    if (this.state.inQueue) {
       return (
         <div>
           <Board />

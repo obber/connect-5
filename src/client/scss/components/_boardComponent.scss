@@ -35,3 +35,20 @@
     background-color: rgba(0, 0, 0, 0.2);
   }
 }
+
+.board-tile .piece {
+  display: none;
+  border-radius: 15px;
+  width: 30px;
+  height: 30px;
+}
+
+.board-tile.tile-1 .piece {
+  display: block;
+  background-color: #000;
+}
+
+.board-tile.tile-2 .piece {
+  display: block;
+  background-color: #fff;
+}
