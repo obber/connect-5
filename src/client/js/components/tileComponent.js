@@ -17,9 +17,9 @@ class Tile extends Component {
     let playerClass = "";
 
     if (this.props.tile === 1) {
-      playerClass = " tile-1"
+      playerClass = " tile-1";
     } else if (this.props.tile === 2) {
-      playerClass = " tile-2"
+      playerClass = " tile-2";
     }
 
     this.setState({
@@ -47,7 +47,7 @@ class Tile extends Component {
       >
         {this.props.tile}
       </div>
-    )
+    );
   }
 }
 
