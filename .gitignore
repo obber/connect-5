@@ -47,3 +47,6 @@ server/auth/config.js
 
 # DB File
 data/
+
+# log files
+logs/

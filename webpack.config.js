@@ -4,7 +4,9 @@ var path = require("path");
 module.exports = {
   client: {
     entry: [
-      "./src/client/js/app.js"
+      "webpack-dev-server/client?http://0.0.0.0:3457",
+      "webpack/hot/only-dev-server",
+      "./src/client/js/index.js"
     ],
     output: {
       path: path.resolve("./dist/client"),
@@ -18,10 +20,13 @@ module.exports = {
         {
           test: /\.js$/,
           exclude: /node_modules/,
-          loaders: ["babel"]
+          loaders: ["react-hot-loader", "babel"]
         }
       ]
     },
-    exclude: "/node_modules/"
+    exclude: "/node_modules/",
+    plugins: [
+      new webpack.HotModuleReplacementPlugin()
+    ]
   }
 }

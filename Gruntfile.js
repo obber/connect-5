@@ -23,10 +23,6 @@ module.exports = function(grunt) {
         files: ['client/index.html'],
         tasks: ['concat']
       },
-      client: {
-        files: ['<%= clientsrc %>/**/*.js'],
-        tasks: ['webpack']
-      },
       server: {
         files: ['<%= serversrc %>/**/*.js'],
         tasks: ['babel']
@@ -53,7 +49,7 @@ module.exports = function(grunt) {
       }
     },
 
-    // for babel
+    // for server-side es6
     babel: {
       options: {
         sourceMap: true,

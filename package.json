@@ -5,7 +5,7 @@
   "main": "dist/server/server.js",
   "scripts": {
     "start": "node dist/server/server.js",
-    "dev": "node dev.server.js",
+    "dev": "npm run watch & node dev.server.js & nodemon",
     "test": "jasmine-node ./spec --forceexit",
     "lint": "grunt eslint",
     "build": "grunt build",
@@ -43,6 +43,7 @@
     "jasmine-node": "^1.14.5",
     "load-grunt-tasks": "^3.5.0",
     "node-sass": "^3.8.0",
+    "nodemon": "^1.10.0",
     "react-hot-loader": "^1.3.0",
     "webpack": "^1.13.1",
     "webpack-dev-server": "^1.14.1"
