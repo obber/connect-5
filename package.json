@@ -9,7 +9,7 @@
     "test": "jasmine-node ./spec --forceexit",
     "lint": "grunt eslint",
     "build": "grunt build",
-    "buildProd": "export NODE_ENV=production && npm run build",
+    "buildProd": "export NODE_ENV=production && grunt buildProd",
     "watch": "grunt watch"
   },
   "repository": {
