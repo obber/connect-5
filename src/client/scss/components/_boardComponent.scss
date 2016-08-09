@@ -5,8 +5,14 @@
   width: 572px;
 }
 
-.board-row {
-  
+.player-1.turn .board-tile:hover .piece {
+  display: block;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.player-2.turn .board-tile:hover .piece {
+  display: block;
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
 .board-tile {
@@ -36,19 +42,25 @@
   }
 }
 
-.board-tile .piece {
-  display: none;
-  border-radius: 15px;
-  width: 30px;
-  height: 30px;
+.board-tile {
+  .piece {
+    display: none;
+    border-radius: 15px;
+    width: 30px;
+    height: 30px;
+  }
 }
 
-.board-tile.tile-1 .piece {
+.board .board-tile.tile-1 .piece {
   display: block;
-  background-color: #000;
+  background-color: #000!important;
 }
 
-.board-tile.tile-2 .piece {
+.board .board-tile.tile-2 .piece {
   display: block;
-  background-color: #fff;
+  background-color: #fff!important;
+}
+
+.board-tile.last .piece {
+  border: 2px solid #d45d5d;
 }

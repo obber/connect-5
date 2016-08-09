@@ -26,7 +26,8 @@ class Board extends Component {
         start: true,
         id: pkt.id,
         turn: pkt.turn,
-        board: pkt.board
+        board: pkt.board,
+        message: pkt.turn ? "Your turn" : "Opponent turn"
       });
     });
 
@@ -34,7 +35,8 @@ class Board extends Component {
       this.setState({
         turn: pkt.turn,
         board: pkt.board,
-        last: pkt.last
+        last: pkt.last,
+        message: pkt.turn ? "Your turn" : "Opponent turn"
       });
     });
 
@@ -48,11 +50,12 @@ class Board extends Component {
   }
 
   render() {
+    const turn = this.state.turn ? "turn" : "";
     if (!this.state.start) {
       return <h1>Preparing for battle...</h1>;
     } else {
       return (
-        <div className="board">
+        <div className={`board player-${this.state.id} ${turn}`}>
           <div className="message">{this.state.message ? this.state.message : ""}</div>
           {this.state.board.map((row, rowIndex) => {
             return <Row

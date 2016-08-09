@@ -15,7 +15,22 @@ class Tile extends Component {
 
   componentWillMount() {
     this.setState({
-      id: indexToTileId(this.props.rowIndex, this.props.columnIndex)
+      id: indexToTileId(this.props.rowIndex, this.props.columnIndex),
+    });
+  }
+
+  componentWillReceiveProps(newProps) {
+    let className = "board-tile";
+    if (newProps.tile === 1) {
+      className += " tile-1";
+    } else if (newProps.tile === 2) {
+      className += " tile-2";
+    }
+    if (newProps.last === this.state.id) {
+      className += " last";
+    }
+    this.setState({
+      className: className
     });
   }
 
@@ -31,21 +46,9 @@ class Tile extends Component {
   }
 
   render() {
-    let className = "board-tile";
-    
-    if (this.props.tile === 1) {
-      className += " tile-1";
-    } else if (this.props.tile === 2) {
-      className += " tile-2";
-    }
-
-    if (this.props.last === this.state.id) {
-      className += " last";
-    }
-
     return (
       <div
-        className={className}
+        className={this.state.className}
         id={this.state.id}
         onClick={this.handleClick.bind(this, this.state.id)} >
         <div className="piece"></div>
