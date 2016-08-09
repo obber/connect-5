@@ -33,13 +33,15 @@ class Board extends Component {
     socket.on("sv.turnOver", pkt => {
       this.setState({
         turn: pkt.turn,
-        board: pkt.board
+        board: pkt.board,
+        last: pkt.last
       });
     });
 
     socket.on("sv.gameOver", pkt => {
       this.setState({
         board: pkt.board,
+        last: pkt.last,
         message: pkt.win ? "You win!" : "You lose."
       });
     });
@@ -58,6 +60,7 @@ class Board extends Component {
               key={rowIndex}
               rowIndex={rowIndex}
               turn={this.state.turn}
+              last={this.state.last}
             />;
           })}
         </div>

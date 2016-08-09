@@ -19,34 +19,37 @@ const gameEmitters = {
     }
   },
 
-  turnOver: (game) => {
+  turnOver: (game, lastTileId) => {
     const nextTurn = game.ctrl.turn();
     const currentBoard = game.ctrl.getBoard();
 
     game.player1.socket.emit("sv.turnOver", {
       board: currentBoard,
-      turn: nextTurn === 1
+      turn: nextTurn === 1,
+      last: lastTileId
     });
     game.player2.socket.emit("sv.turnOver", {
       board: currentBoard,
-      turn: nextTurn === 2
+      turn: nextTurn === 2,
+      last: lastTileId
     });
   },
 
-  gameOver: (game) => {
+  gameOver: (game, lastTileId) => {
     const currentBoard = game.ctrl.getBoard();
     const winner = game.ctrl.check();
 
     game.player1.socket.emit("sv.gameOver", {
       board: currentBoard,
-      win: winner === 1
-    });    
+      win: winner === 1,
+      last: lastTileId
+    });
     game.player2.socket.emit("sv.gameOver", {
       board: currentBoard,
-      win: winner === 2
+      win: winner === 2,
+      last: lastTileId
     });
   }
-
 };
 
 export { gameEmitters };

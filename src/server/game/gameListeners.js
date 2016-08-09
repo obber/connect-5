@@ -17,9 +17,9 @@ const turnOverListener = ({ game, player }, pkt) => {
   if (game.ctrl.add(pkt.tileId)) {
     // check for winner
     if (game.ctrl.check()) {
-      game.emit.gameOver();
+      game.emit.gameOver(pkt.tileId);
     } else {
-      game.emit.turnOver();
+      game.emit.turnOver(pkt.tileId);
     }
   }
 };

@@ -98,6 +98,7 @@ module.exports = function(grunt) {
   grunt.config('webpack', require("./webpack.config.js"));
 
   grunt.registerTask('default', ['concat', 'sass']);
-  grunt.registerTask('build', ['eslint', 'concat', 'sass', 'babel', 'webpack:production']);
+  grunt.registerTask('build', ['eslint', 'concat', 'sass', 'babel', 'webpack:client']);
+  grunt.registerTask('buildProd', ['eslint', 'concat', 'sass', 'babel', 'webpack:production']);
 
 };

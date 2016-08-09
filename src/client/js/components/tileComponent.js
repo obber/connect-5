@@ -14,17 +14,8 @@ class Tile extends Component {
   }
 
   componentWillMount() {
-    let playerClass = "";
-
-    if (this.props.tile === 1) {
-      playerClass = " tile-1";
-    } else if (this.props.tile === 2) {
-      playerClass = " tile-2";
-    }
-
     this.setState({
-      id: indexToTileId(this.props.rowIndex, this.props.columnIndex),
-      className: this.state.className + playerClass
+      id: indexToTileId(this.props.rowIndex, this.props.columnIndex)
     });
   }
 
@@ -41,10 +32,15 @@ class Tile extends Component {
 
   render() {
     let className = "board-tile";
+    
     if (this.props.tile === 1) {
       className += " tile-1";
     } else if (this.props.tile === 2) {
       className += " tile-2";
+    }
+
+    if (this.props.last === this.state.id) {
+      className += " last";
     }
 
     return (

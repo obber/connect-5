@@ -93,7 +93,7 @@ describe("game-related socket endpoints:", () => {
     });
   });
 
-  it("cl.turnOver should receive a sv.turnOver in response and toggle the turn", done => {
+  it("cl.turnOver should receive a sv.turnOver in response, last tile, and toggle the turn", done => {
     const test = _.after(2, () => {
       done();
     });
@@ -104,6 +104,7 @@ describe("game-related socket endpoints:", () => {
       const result = _.cloneDeep(pkt);
       expect(result).toBeDefined();
       expect(result.board).toBeDefined();
+      expect(result.last).toBe("bb");
       expect(result.turn).toBe(false);
       test();
     });
@@ -111,6 +112,7 @@ describe("game-related socket endpoints:", () => {
       const result = _.cloneDeep(pkt);
       expect(result).toBeDefined();
       expect(result.board).toBeDefined();
+      expect(result.last).toBe("bb");
       expect(result.turn).toBe(true);
       test();
     });
