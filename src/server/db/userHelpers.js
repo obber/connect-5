@@ -1,20 +1,28 @@
 import { db } from "../common";
 
 const exists = (table, options) => (
-  db(table).where(options)
+  db(table)
+    .where(options)
     .then(resp => !!resp.length)
 );
 
 const insert = (table, options) => (
-  db(table).insert(options)
-    .then(resp => {
-      console.log("resp = ", resp);
-    })
+  db(table)
+    .insert(options)
+    .then(resp => !!resp.length)
 );
 
-const verifyToken = (token) => (
-  db("users").where({ accessToken: token })
-    .then(resp => resp)
+const update = (table, who, what) => (
+  db(table)
+    .where(who)
+    .update(what)
+    .then(resp => !!resp)
 );
 
-export { exists, insert, verifyToken };
+const verifyToken = (accessToken, facebookId) => (
+  db("users")
+    .where({ accessToken, facebookId })
+    .then(resp => !!resp.length)
+);
+
+export { exists, insert, update, verifyToken };
