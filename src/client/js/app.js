@@ -4,18 +4,26 @@ import Board from "./components/boardComponent";
 import { connectSocket, socket } from "./socket.config";
 
 class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
-      inQueue: false
+      inQueue: false,
+      loggedIn: false,
+      loading: true,
+      error: ""
     };
 
     // bindings
     this.handleClick = this.handleClick.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
+    this.props.login().then(
+      () => this.setState({ loading: false, loggedIn: true }),
+      error => this.setState({ loading: true, error: error })
+    );
+
     connectSocket();
   }
 
@@ -29,7 +37,7 @@ class App extends Component {
   }
 
   render () {
-    if (!this.props.authed) {
+    if (this.state.loading) {
       return (
         <div>
           Loading!

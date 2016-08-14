@@ -2,8 +2,6 @@ import reactDOM from "react-dom";
 import React from "react";
 
 import App from "./app";
-import CheckAuth from "./wrapper-components/checkAuth";
+import * as auth from "./modules/auth";
 
-const AppWithLogin = CheckAuth(App);
-
-reactDOM.render(<AppWithLogin />, document.getElementById("app"));
+reactDOM.render(<App login={auth.loginPromise} />, document.getElementById("app"));

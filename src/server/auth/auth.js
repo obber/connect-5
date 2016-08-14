@@ -70,6 +70,8 @@ app.get("/isLoggedIn", (req, res) => {
           res.json({ loggedIn: false });
         }
       });
+  } else {
+    res.json({ loggedIn: false });
   }
 });
 
