@@ -10,7 +10,8 @@
     "lint": "grunt eslint",
     "build": "grunt build",
     "buildProd": "export NODE_ENV=production && grunt buildProd",
-    "watch": "grunt watch"
+    "watch": "grunt watch",
+    "removedb": "rm ./data/db.sqlite"
   },
   "repository": {
     "type": "git",
@@ -52,16 +53,21 @@
   "dependencies": {
     "babel-loader": "^6.2.4",
     "body-parser": "^1.15.2",
+    "cookie-parser": "^1.4.3",
     "express": "^4.14.0",
+    "express-session": "^1.14.0",
     "jquery": "^3.1.0",
+    "knex": "^0.11.10",
     "lodash": "^4.14.1",
     "passport": "^0.3.2",
     "passport-facebook": "^2.1.1",
     "path": "^0.12.7",
+    "query-string": "^4.2.2",
     "react": "^15.2.1",
     "react-dom": "^15.2.1",
     "request": "^2.72.0",
     "socket.io": "^1.4.8",
-    "socket.io-client": "^1.4.8"
+    "socket.io-client": "^1.4.8",
+    "sqlite3": "^3.1.4"
   }
 }

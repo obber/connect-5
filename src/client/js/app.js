@@ -20,6 +20,7 @@ class App extends Component {
   }
 
   handleClick() {
+    console.log("emitting cl.enqueue");
     socket.emit("cl.enqueue");
 
     this.setState({
@@ -28,15 +29,21 @@ class App extends Component {
   }
 
   render () {
-    if (this.state.inQueue) {
+    if (!this.props.authed) {
       return (
         <div>
+          Loading!
+        </div>
+      );
+    } else if (this.state.inQueue) {
+      return (
+        <div className="container">
           <Board />
         </div>
       );
     } else {
       return (
-        <div>
+        <div className="container">
           <h1>Hello world!</h1>
           <button onClick={this.handleClick}>Queue for a match</button>
         </div>

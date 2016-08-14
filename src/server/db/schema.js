@@ -1,14 +1,15 @@
 // the database configuration is inside of server/common.js
 
-import { knex } from "../common";
+import { db } from "../common";
 
-knex.schema.createTableIfNotExists("users", table => {
-  table.increments("ID").primary();
+db.schema.createTableIfNotExists("users", table => {
+  table.increments("Id").primary();
   table.string("username");
   table.string("firstname");
   table.string("lastname");
-  table.string("email");
   table.string("password");
+  table.string("accessToken");
+  table.string("facebookId");
 }).then(() => {
   console.log("User schema created.");
 });

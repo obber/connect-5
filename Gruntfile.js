@@ -20,8 +20,8 @@ module.exports = function(grunt) {
         tasks: ['sass']
       },
       html: {
-        files: ['client/index.html'],
-        tasks: ['concat']
+        files: ['<%= clientsrc %>/**/*.html'],
+        tasks: ['copy']
       },
       server: {
         files: ['<%= serversrc %>/**/*.js'],
@@ -29,11 +29,14 @@ module.exports = function(grunt) {
       }
     },
 
-    // only used to move src client html to dist
-    concat: {
-      html: {
-        src: ['<%= clientsrc %>/index.html'],
-        dest: '<%= clientdist %>/index.html'
+    // used to move src client html to dist
+    copy: {
+      clientHtml: {
+        expand: true,
+        cwd: '<%= clientsrc %>/',
+        src: '**/*.html',
+        dest: '<%= clientdist %>/',
+        filter: 'isFile'
       }
     },
 
@@ -97,8 +100,8 @@ module.exports = function(grunt) {
   // webpack
   grunt.config('webpack', require("./webpack.config.js"));
 
-  grunt.registerTask('default', ['concat', 'sass']);
-  grunt.registerTask('build', ['eslint', 'concat', 'sass', 'babel', 'webpack:client']);
-  grunt.registerTask('buildProd', ['eslint', 'concat', 'sass', 'babel', 'webpack:production']);
+  grunt.registerTask('default', ['copy', 'sass']);
+  grunt.registerTask('build', ['eslint', 'copy', 'sass', 'babel', 'webpack:client']);
+  grunt.registerTask('buildProd', ['eslint', 'copy', 'sass', 'babel', 'webpack:production']);
 
 };

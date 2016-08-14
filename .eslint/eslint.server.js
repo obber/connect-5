@@ -86,7 +86,7 @@ module.exports = {
         "max-len": "off",
         "max-lines": "error",
         "max-nested-callbacks": "error",
-        "max-params": "error",
+        "max-params": "off",
         "max-statements": [
             "error",
             {
@@ -94,7 +94,7 @@ module.exports = {
             }
         ],
         "max-statements-per-line": "error",
-        "multiline-ternary": "error",
+        "multiline-ternary": "off",
         "new-parens": "error",
         "newline-after-var": "off",
         "newline-before-return": "off",
@@ -118,7 +118,7 @@ module.exports = {
         "no-extra-label": "error",
         "no-extra-parens": "off",
         "no-floating-decimal": "error",
-        "no-implicit-coercion": "error",
+        "no-implicit-coercion": "off",
         "no-implicit-globals": "error",
         "no-implied-eval": "error",
         "no-inline-comments": "error",
@@ -163,7 +163,7 @@ module.exports = {
         "no-spaced-func": "error",
         "no-sync": "error",
         "no-tabs": "error",
-        "no-ternary": "error",
+        "no-ternary": "off",
         "no-throw-literal": "error",
         "no-trailing-spaces": "off",
         "no-undef-init": "error",

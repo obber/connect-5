@@ -22,9 +22,7 @@ const dequeue = (socket) => {
     console.error("this socket is not in the queue, but tried to dequeue. socket.id = ", socket.id);
     return -1;
   }
-
-  // we return the 0th position of splice, since splice returns an array of removed items.
-  // it also manipulates the array.
+  
   return queue.shift();
 };
 
