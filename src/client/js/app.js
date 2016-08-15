@@ -20,7 +20,7 @@ class App extends Component {
 
   componentDidMount() {
     this.props.login().then(
-      () => this.setState({ loading: false, loggedIn: true }),
+      resp => this.setState({ loading: !resp, loggedIn: true }),
       error => this.setState({ loading: true, error: error })
     );
 
@@ -52,7 +52,7 @@ class App extends Component {
     } else {
       return (
         <div className="container">
-          <h1>Hello world!</h1>
+          <h1>Connect 5!</h1>
           <button onClick={this.handleClick}>Queue for a match</button>
         </div>
       );

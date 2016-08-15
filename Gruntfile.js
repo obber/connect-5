@@ -47,7 +47,8 @@ module.exports = function(grunt) {
       },
       dist: {
         files: {
-          '<%= clientdist %>/main.css': '<%= stylesdir %>/main.scss'
+          '<%= clientdist %>/main.css': '<%= stylesdir %>/main.scss',
+          '<%= clientdist %>/login.css': '<%= stylesdir %>/login.scss'
         }
       }
     },
